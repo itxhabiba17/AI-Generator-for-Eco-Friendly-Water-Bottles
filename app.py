@@ -250,10 +250,12 @@ div[data-baseweb="input"], div[data-baseweb="base-input"], div[data-baseweb="tex
     border: 1.5px solid var(--box-line) !important;
     border-radius: 10px !important;
 }
-[data-testid="stSelectbox"] div[data-baseweb="select"] > div > div,
+[data-testid="stSelectbox"], [data-testid="stSelectbox"] div[data-baseweb="select"],
 [data-testid="stSelectbox"] div[data-baseweb="select"] div {
-    background-color: transparent !important;
+    background-color: var(--box) !important;
 }
+[data-testid="stSelectbox"] { background-color: transparent !important; }
+[data-testid="stSelectbox"] div[data-baseweb="select"] { border-radius: 10px !important; }
 [data-testid="stSelectbox"] div[data-baseweb="select"] *,
 [data-testid="stSelectbox"] div[data-baseweb="select"] input {
     color: #0F2417 !important;
