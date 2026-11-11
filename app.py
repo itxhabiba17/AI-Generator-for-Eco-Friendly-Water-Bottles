@@ -77,97 +77,125 @@ CUSTOM_CSS = """
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap');
 
 :root {
-    --forest: #1F4D2B;
-    --leaf: #3E8E41;
-    --mint: #E8F3EA;
-    --line: #CFE3D2;
-    --ink: #16251B;
+    --bg: #F6FAF3;          /* page background: very soft sage white */
+    --sidebar: #E8F1E4;     /* sidebar: pale sage */
+    --panel: #FFFFFF;       /* cards and inputs */
+    --line: #D5E5D1;        /* soft borders */
+    --soft: #DCEBD6;        /* hero / metric tint */
+    --leaf: #8FC79A;        /* buttons */
+    --leaf-dark: #7DB88A;   /* button hover */
+    --forest: #2F5D3A;      /* headings */
+    --ink: #2B4333;         /* body text */
 }
 
-html, body, .stApp, [data-testid="stAppViewContainer"] {
-    background: #FFFFFF !important;
-    color: var(--ink);
+html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
+    background: var(--bg) !important;
+    color: var(--ink) !important;
+    color-scheme: light;
     font-family: 'DM Sans', 'Segoe UI', sans-serif;
 }
-.stApp p, .stApp li, .stApp label, .stApp span, .stApp div[data-testid="stMarkdownContainer"] {
+[data-testid="stHeader"] { background: transparent !important; }
+.stApp p, .stApp li, .stApp label, .stApp span, .stApp small,
+.stApp div[data-testid="stMarkdownContainer"], .stApp [data-testid="stCaptionContainer"] {
     color: var(--ink);
 }
-h1, h2, h3, h4 {
+.stApp h1, .stApp h2, .stApp h3, .stApp h4 {
     font-family: 'Fraunces', Georgia, serif !important;
     color: var(--forest) !important;
     letter-spacing: -0.01em;
 }
-[data-testid="stHeader"] { background: transparent; }
 
 /* Sidebar */
 [data-testid="stSidebar"] {
-    background: var(--mint) !important;
+    background: var(--sidebar) !important;
     border-right: 1px solid var(--line);
 }
 [data-testid="stSidebar"] * { color: var(--ink); }
 
-/* Hero banner */
-.hero {
+/* Hero banner: soft green with dark text */
+.stApp .hero {
     background:
-        radial-gradient(circle at 92% 20%, rgba(255,255,255,0.18) 0, rgba(255,255,255,0) 38%),
-        radial-gradient(circle at 80% 110%, rgba(255,255,255,0.14) 0, rgba(255,255,255,0) 45%),
-        var(--forest);
+        radial-gradient(circle at 90% 10%, rgba(255,255,255,0.65) 0, rgba(255,255,255,0) 45%),
+        linear-gradient(135deg, #D6EAD1 0%, #E9F4E4 100%);
+    border: 1px solid var(--line);
     border-radius: 18px;
     padding: 2rem 2.2rem;
     margin-bottom: 1.4rem;
 }
-.hero h1 { color: #FFFFFF !important; margin: 0 0 .4rem 0; font-size: 2.2rem; }
-.hero p  { color: #DDEFE0 !important; margin: 0; font-size: 1.05rem; max-width: 46rem; }
+.stApp .hero h1 { color: var(--forest) !important; margin: 0 0 .4rem 0; font-size: 2.1rem; }
+.stApp .hero p  { color: var(--ink) !important; margin: 0; font-size: 1.05rem; max-width: 46rem; }
 
-/* Output cards */
-.card {
-    background: #FFFFFF;
-    border: 1px solid var(--line);
-    border-left: 5px solid var(--leaf);
-    border-radius: 12px;
-    padding: 1.2rem 1.5rem;
-    margin: .5rem 0 1rem 0;
-}
-.card * { color: var(--ink); }
 .note {
-    background: var(--mint);
+    background: var(--soft);
     border-radius: 10px;
     padding: .8rem 1rem;
     border: 1px solid var(--line);
     font-size: .92rem;
 }
 
-/* Inputs: keep readable even if the browser is in dark mode */
-div[data-baseweb="input"], div[data-baseweb="textarea"], div[data-baseweb="select"] > div {
-    background: #FFFFFF !important;
+/* Form container and bordered cards */
+[data-testid="stForm"], [data-testid="stVerticalBlockBorderWrapper"] {
+    background: var(--panel) !important;
     border-color: var(--line) !important;
+    border-radius: 14px !important;
 }
-input, textarea { color: var(--ink) !important; }
+
+/* Inputs: force a light look even when the browser or Streamlit is in dark mode */
+div[data-baseweb="input"], div[data-baseweb="base-input"], div[data-baseweb="textarea"],
+div[data-baseweb="select"] > div {
+    background: #FBFDFA !important;
+    border: 1px solid var(--line) !important;
+    border-radius: 10px !important;
+}
+div[data-baseweb="input"] input, div[data-baseweb="base-input"] input,
+div[data-baseweb="textarea"] textarea, textarea, input {
+    background: transparent !important;
+    color: var(--ink) !important;
+    -webkit-text-fill-color: var(--ink) !important;
+}
+input::placeholder, textarea::placeholder {
+    color: #8AA38F !important;
+    -webkit-text-fill-color: #8AA38F !important;
+}
+div[data-baseweb="select"] *, div[data-baseweb="select"] svg {
+    color: var(--ink) !important;
+    fill: var(--ink) !important;
+    -webkit-text-fill-color: var(--ink) !important;
+}
+/* Dropdown menus */
+div[data-baseweb="popover"] ul, div[data-baseweb="popover"] li, div[data-baseweb="menu"] {
+    background: #FFFFFF !important;
+    color: var(--ink) !important;
+}
+div[data-baseweb="popover"] li:hover { background: var(--soft) !important; }
 
 /* Buttons */
 .stButton > button, .stDownloadButton > button, [data-testid="stFormSubmitButton"] > button {
+    background: var(--leaf) !important;
+    color: #1F3A28 !important;
+    border: 1px solid var(--leaf-dark) !important;
     border-radius: 10px;
-    border: 1px solid var(--leaf);
     font-weight: 700;
 }
-.stButton > button[kind="primary"], [data-testid="stFormSubmitButton"] > button[kind="primaryFormSubmit"],
-[data-testid="stFormSubmitButton"] > button[kind="primary"] {
-    background: var(--leaf) !important;
-    color: #FFFFFF !important;
-    border-color: var(--leaf) !important;
+.stButton > button *, .stDownloadButton > button *, [data-testid="stFormSubmitButton"] > button * {
+    color: #1F3A28 !important;
 }
-.stButton > button[kind="primary"] *, [data-testid="stFormSubmitButton"] > button * { color: #FFFFFF !important; }
-.stDownloadButton > button { background: #FFFFFF; color: var(--forest); }
-.stDownloadButton > button * { color: var(--forest) !important; }
+.stButton > button:hover, .stDownloadButton > button:hover, [data-testid="stFormSubmitButton"] > button:hover {
+    background: var(--leaf-dark) !important;
+}
+.stDownloadButton > button { background: #FFFFFF !important; border-color: var(--leaf) !important; }
+.stDownloadButton > button:hover { background: var(--soft) !important; }
 
-/* Tabs and metrics */
+/* Tabs, metrics, expanders, code blocks */
 button[data-baseweb="tab"] { font-weight: 700; }
 [data-testid="stMetric"] {
-    background: var(--mint);
+    background: var(--soft);
     border: 1px solid var(--line);
     border-radius: 12px;
     padding: .8rem 1rem;
 }
+[data-testid="stExpander"] { background: var(--panel); border-color: var(--line) !important; border-radius: 10px; }
+[data-testid="stCode"] pre, [data-testid="stCode"] code { background: #F1F7EE !important; color: var(--ink) !important; }
 </style>
 """
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
@@ -598,7 +626,7 @@ def page_comparison() -> None:
     st.dataframe(df, column_config=config)
 
     st.subheader("Score chart")
-    st.bar_chart(df[CRITERIA], color=["#1B5E20", "#2E7D32", "#43A047", "#81C784", "#C8E6C9"])
+    st.bar_chart(df[CRITERIA], color=["#4E8F5E", "#7DB88A", "#A8D5B0", "#C9E4B8", "#E3C9A8"])
 
     st.download_button("Download scores as CSV", data=df.to_csv().encode("utf-8"),
                        file_name="content_scores.csv", mime="text/csv", key="dl_scores")
