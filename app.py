@@ -196,6 +196,90 @@ button[data-baseweb="tab"] { font-weight: 700; }
 }
 [data-testid="stExpander"] { background: var(--panel); border-color: var(--line) !important; border-radius: 10px; }
 [data-testid="stCode"] pre, [data-testid="stCode"] code { background: #F1F7EE !important; color: var(--ink) !important; }
+
+/* ---- Stronger overrides: text boxes and text contrast ---- */
+:root { --ink: #16301F; --forest: #1F4A2C; --box: #EAF4E6; --box-line: #9CC7A3; }
+
+/* Labels and body text: darker and a little bolder */
+.stApp label, .stApp [data-testid="stWidgetLabel"] p {
+    color: #16301F !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+}
+.stApp p, .stApp li { color: #16301F !important; }
+[data-testid="stCaptionContainer"], [data-testid="stCaptionContainer"] * { color: #3C5846 !important; }
+
+/* Text boxes: soft mint fill, clear green border, every wrapper layer covered */
+[data-testid="stTextInputRootElement"], [data-testid="stTextInputRootElement"] > div,
+[data-testid="stTextAreaRootElement"], [data-testid="stTextAreaRootElement"] > div,
+[data-testid="stTextInput"] div[data-baseweb], [data-testid="stTextArea"] div[data-baseweb],
+div[data-baseweb="input"], div[data-baseweb="base-input"], div[data-baseweb="textarea"] {
+    background-color: var(--box) !important;
+    border-color: var(--box-line) !important;
+    color-scheme: light;
+}
+[data-testid="stTextInputRootElement"], [data-testid="stTextAreaRootElement"] {
+    border: 1.5px solid var(--box-line) !important;
+    border-radius: 10px !important;
+}
+[data-testid="stTextInputRootElement"] > div, [data-testid="stTextAreaRootElement"] > div,
+div[data-baseweb="input"], div[data-baseweb="base-input"], div[data-baseweb="textarea"] {
+    border: none !important;
+}
+[data-testid="stTextInputRootElement"]:focus-within, [data-testid="stTextAreaRootElement"]:focus-within {
+    border-color: #5E9C6B !important;
+    box-shadow: 0 0 0 2px rgba(94,156,107,0.25) !important;
+}
+.stApp input, .stApp textarea {
+    background-color: transparent !important;
+    color: #0F2417 !important;
+    -webkit-text-fill-color: #0F2417 !important;
+    font-weight: 500 !important;
+    font-size: 1rem !important;
+}
+.stApp input::placeholder, .stApp textarea::placeholder {
+    color: #5F7A67 !important;
+    -webkit-text-fill-color: #5F7A67 !important;
+    opacity: 1 !important;
+    font-weight: 400 !important;
+}
+
+/* Dropdowns (Marketing tone / Target platform) */
+[data-testid="stSelectbox"] div[data-baseweb="select"] > div {
+    background-color: var(--box) !important;
+    border: 1.5px solid var(--box-line) !important;
+    border-radius: 10px !important;
+}
+[data-testid="stSelectbox"] div[data-baseweb="select"] > div > div,
+[data-testid="stSelectbox"] div[data-baseweb="select"] div {
+    background-color: transparent !important;
+}
+[data-testid="stSelectbox"] div[data-baseweb="select"] *,
+[data-testid="stSelectbox"] div[data-baseweb="select"] input {
+    color: #0F2417 !important;
+    -webkit-text-fill-color: #0F2417 !important;
+    font-weight: 600 !important;
+}
+[data-testid="stSelectbox"] svg { fill: #1F4A2C !important; color: #1F4A2C !important; }
+
+/* Open dropdown list */
+div[data-baseweb="popover"], div[data-baseweb="popover"] > div, div[data-baseweb="menu"],
+div[data-baseweb="popover"] ul, div[data-baseweb="popover"] li {
+    background-color: #F4FAF1 !important;
+}
+div[data-baseweb="popover"] li, div[data-baseweb="popover"] li * {
+    color: #16301F !important;
+    -webkit-text-fill-color: #16301F !important;
+}
+div[data-baseweb="popover"] li:hover, div[data-baseweb="popover"] li[aria-selected="true"] {
+    background-color: #D9ECD4 !important;
+}
+
+/* Buttons: darker label for readability */
+.stButton > button *, .stDownloadButton > button *, [data-testid="stFormSubmitButton"] > button * {
+    color: #12281A !important;
+    font-weight: 700 !important;
+}
 </style>
 """
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
